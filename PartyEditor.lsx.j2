@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<save>
+    <version major="4" minor="0" revision="9" build="319"/>
+    <region id="PartyPreset">
+        <node id="root">
+            <children>
+                <node id="Presets">
+                    <children>
+                        {#- <!-- TODO loop over for each character, now just does 1 --> #}
+                        <node id="Preset">
+                            <attribute id="FactionId" type="guid" value="{{ character.ServerCharacter.Template.CombatComponent.Faction }}"/>
+                            {#- <!-- TODO What should this be --> #}
+                            <attribute id="Level" type="FixedString" value="TUT_Avernus_C"/>
+                            <attribute id="Position" type="fvec3">
+                                <float3 x="-10.169522" y="16.97168" z="-426.87961"/>
+                            </attribute>
+                            <attribute id="Rotation" type="mat3x3">
+                                <mat3>
+                                    <float3 x="0.66773021" y="0" z="0.74440342"/>
+                                    <float3 x="0" y="1" z="0"/>
+                                    <float3 x="-0.74440342" y="0" z="0.66773021"/>
+                                </mat3>
+                            </attribute>
+                            <attribute id="TotalExperience" type="int32" value="{{ character.Experience.TotalExperience }}"/>
+                            <children>
+                                <node id="BlockedDebugTags"/>
+                                <node id="DebugTags"/>
+                                <node id="FullDefinition">
+                                    <attribute id="CustomName" type="LSString" value="{{ character.CharacterCreationStats.Name }}"/>
+                                    <children>
+                                        <node id="Appearance">
+                                            {#- <!-- TODO Check if this is the right place to get AccessorySet --> #}
+                                            <attribute id="AccessorySet" type="guid" value="{{ character.CCLevelUp.LevelUps[0].AccessorySet }}"/>
+                                            <attribute id="CustomIcon" type="ScratchBuffer" value="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"/>
+                                            <attribute id="EyeColor" type="guid" value="{{ character.CharacterCreationAppearance.EyeColor }}"/>
+                                            <attribute id="HairColor" type="guid" value="{{ character.CharacterCreationAppearance.HairColor }}"/>
+                                            <attribute id="HeterochromiaEyeColor" type="guid" value="{{ character.CharacterCreationAppearance.SecondEyeColor }}"/>
+                                            <attribute id="SkinColor" type="guid" value="{{ character.CharacterCreationAppearance.SkinColor }}"/>
+                                            <children>
+                                                <node id="MaterialSettings">
+                                                    <children>
+                                                        {%- for element in character.CharacterCreationAppearance.Elements %}
+                                                        <node id="MaterialSetting">
+                                                            <attribute id="Metalness" type="float" value="{{ element.MetallicTint }}"/>
+                                                            <attribute id="Roughness" type="float" value="{{ element.GlossyTint }}"/>
+                                                            <attribute id="Color" type="guid" value="{{ element.Color }}"/>
+                                                            <attribute id="Intensity" type="float" value="{{ element.ColorIntensity }}"/>
+                                                            <attribute id="Material" type="guid" value="{{ element.Material }}"/>
+                                                        </node>
+                                                        {%- endfor %}
+                                                    </children>
+                                                </node>
+                                                <node id="Visuals">
+                                                    <children>
+                                                        {%- for visual in character.CharacterCreationAppearance.Visuals %}
+                                                        <node id="Visual">
+                                                            <attribute id="Object" type="guid" value="{{ visual }}"/>
+                                                        </node>
+                                                        {%- endfor %}
+                                                    </children>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Basics">
+                                            <attribute id="Background" type="guid" value="{{ character.Background.Background }}"/>
+                                            <attribute id="BodyShape" type="uint8" value="{{ character.CharacterCreationStats.BodyShape }}"/>
+                                            <attribute id="BodyType" type="uint8" value="{{ character.CharacterCreationStats.BodyType }}"/>
+                                            <attribute id="God" type="guid" value="{{ character.God.God }}"/>
+                                            <attribute id="Identity" type="uint8" value="{{ character.Identity.field_0 }}"/>
+                                            <attribute id="Origin" type="guid" value="{{ character.Origin.field_18 }}"/>
+                                            <attribute id="Race" type="guid" value="{{ character.Race.Race }}"/>
+                                            <attribute id="RootTemplateID" type="guid" value="{{ character.GameObjectVisual.RootTemplateId }}"/>
+                                            <attribute id="SubRace" type="guid" value="{{ character.CharacterCreationStats.SubRace }}"/>
+                                            <attribute id="Voice" type="guid" value="{{ character.Voice.Voice }}"/>
+                                        </node>
+                                        <node id="LearnedSpells"/>
+                                        <node id="LevelUps">
+                                            <children>
+                                                {%- for level_up in character.CCLevelUp.LevelUps %}
+                                                <node id="LevelUp">
+                                                    <attribute id="Class" type="guid" value="{{ level_up.Class }}"/>
+                                                    <attribute id="Feat" type="guid" value="{{ level_up.Feat }}"/>
+                                                    <attribute id="SubClass" type="guid" value="{{ level_up.SubClass }}"/>
+                                                    <children>
+                                                        <node id="AbilityImprovements">
+                                                            <children>
+                                                                <node id="AbilityImprovement">
+                                                                    <attribute id="Object" type="int32" value="{{ level_up.Abilities[0] }}"/>
+                                                                </node>
+                                                                <node id="AbilityImprovement">
+                                                                    <attribute id="Object" type="int32" value="{{ level_up.Abilities[1] }}"/>
+                                                                </node>
+                                                                <node id="AbilityImprovement">
+                                                                    <attribute id="Object" type="int32" value="{{ level_up.Abilities[2] }}"/>
+                                                                </node>
+                                                                <node id="AbilityImprovement">
+                                                                    <attribute id="Object" type="int32" value="{{ level_up.Abilities[3] }}"/>
+                                                                </node>
+                                                                <node id="AbilityImprovement">
+                                                                    <attribute id="Object" type="int32" value="{{ level_up.Abilities[4] }}"/>
+                                                                </node>
+                                                                <node id="AbilityImprovement">
+                                                                    <attribute id="Object" type="int32" value="{{ level_up.Abilities[5] }}"/>
+                                                                </node>
+                                                                <node id="AbilityImprovement">
+                                                                    <attribute id="Object" type="int32" value="{{ level_up.Abilities[6] }}"/>
+                                                                </node>
+                                                            </children>
+                                                        </node>
+                                                        <node id="PreparedSpells">
+                                                            <children>
+                                                                <node id="PreparedSpellSlots"/>
+                                                            </children>
+                                                        </node>
+                                                        <node id="Selectors">
+                                                            <children>
+                                                                {%- if level_up.Upgrades.AbilityBonuses is defined and level_up.Upgrades.AbilityBonuses|length > 0 %}
+                                                                <node id="AbilityBonusSelectors">
+                                                                    <children>
+                                                                        {%- set count = 0 %}
+                                                                        {%- for ability_bonus in level_up.Upgrades.AbilityBonuses %}
+                                                                        <node id="AbilityBonusSelector">
+                                                                            <attribute id="DefinitionIndex" type="int32" value="{{ count }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ ability_bonus.Multiclass }}"/>
+                                                                            <attribute id="Level" type="int32" value="{{ ability_bonus.Level }}"/>
+                                                                            <attribute id="ListUUID" type="guid" value="{{ ability_bonus.AbilityBonus }}"/>
+                                                                            <attribute id="OwnerType" type="uint8" value="{{ ability_bonus.Type }}"/>
+                                                                            <attribute id="OwnerUUID" type="guid" value="{{ ability_bonus.AbilityBonus }}"/>
+                                                                            <attribute id="ParentOwnerUUID" type="guid" value="{{ ability_bonus.SubClass }}"/>
+                                                                            <attribute id="SelectorId" type="LSString" value=""/>
+                                                                            <children>
+                                                                                <node id="SlotBonusValues">
+                                                                                    <children>
+                                                                                        {%- for amount in ability_bonus.BonusAmounts %}
+                                                                                        <node id="SlotBonusValue">
+                                                                                            <attribute id="Object" type="int32" value="{{ amount }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                                <node id="Slots">
+                                                                                    <children>
+                                                                                        {%- for value in ability_bonus.Bonuses %}
+                                                                                        <node id="Slot">
+                                                                                            <attribute id="Value" type="uint8" value="{{ attribute_map[value] }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                            </children>
+                                                                        </node>
+                                                                        {%- set count = count + 1 %}
+                                                                        {%- endfor %}
+                                                                    </children>
+                                                                </node>
+                                                                {%- else %}
+                                                                <node id="AbilityBonusSelectors"/>
+                                                                {%- endif %}
+                                                                {%- if level_up.Upgrades.Feats is defined and level_up.Upgrades.Feats|length > 0 %}
+                                                                <node id="AbilitySelectors">
+                                                                    <children>
+                                                                        {%- set count = 0 %}
+                                                                        {%- for feat in level_up.Upgrades.Feats %}
+                                                                        <node id="AbilitySelector">
+                                                                            <attribute id="DefinitionIndex" type="int32" value="{{ count }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ feat.Multiclass }}"/>
+                                                                            <attribute id="Level" type="int32" value="{{ feat.Level }}"/>
+                                                                            <attribute id="ListUUID" type="guid" value="{{ feat.Feat }}"/>
+                                                                            <attribute id="OwnerType" type="uint8" value="{{ feat.Type }}"/>
+                                                                            <attribute id="OwnerUUID" type="guid" value="{{ feat.Class }}"/>
+                                                                            <attribute id="ParentOwnerUUID" type="guid" value="{{ feat.Subclass }}"/>
+                                                                            <attribute id="SelectorId" type="LSString" value="{{ feat.FeatName }}"/>
+                                                                            <children>
+                                                                                <node id="Slots">
+                                                                                    <children>
+                                                                                        {%- for slot in feat.Array_b8 %}
+                                                                                        <node id="Slot">
+                                                                                            <attribute id="Value" type="uint8" value="{{ slot }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                            </children>
+                                                                        </node>
+                                                                        {%- set count = count + 1 %}
+                                                                        {%- endfor %}
+                                                                    </children>
+                                                                </node>
+                                                                {%- else %}
+                                                                <node id="AbilitySelectors"/>
+                                                                {%- endif %}
+                                                                {%- if level_up.Upgrades.Equipment is defined and level_up.Upgrades.Equipment|length > 0 %}
+                                                                <node id="EquipmentSelectors">
+                                                                    <children>
+                                                                        {%- set count = 0 %}
+                                                                        {%- for equipment in level_up.Upgrades.Equipment %}
+                                                                        <node id="EquipmentSelector">
+                                                                            <attribute id="DefinitionIndex" type="int32" value="{{ count }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ equipment.Multiclass }}"/>
+                                                                            <attribute id="Level" type="int32" value="{{ equipment.Level }}"/>
+                                                                            <attribute id="ListUUID" type="guid" value="{{ equipment.EquipmentList }}"/>
+                                                                            <attribute id="OwnerType" type="uint8" value="{{ equipment.Type }}"/>
+                                                                            <attribute id="OwnerUUID" type="guid" value="{{ equipment.Class }}"/>
+                                                                            <attribute id="ParentOwnerUUID" type="guid" value="{{ equipment.Subclass }}"/>
+                                                                            <attribute id="SelectorId" type="LSString" value="{{ equipment.SelectorId }}"/>
+                                                                            <children>
+                                                                                <node id="Slots">
+                                                                                    <children>
+                                                                                        {%- for name in equipment.Equipment %}
+                                                                                        <node id="Slot">
+                                                                                            <attribute id="Value" type="FixedString" value="{{ name }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                            </children>
+                                                                        </node>
+                                                                        {%- set count = count + 1 %}
+                                                                        {%- endfor %}
+                                                                    </children>
+                                                                </node>
+                                                                {%- else %}
+                                                                <node id="EquipmentSelectors"/>
+                                                                {%- endif %}
+                                                                {%- if level_up.Upgrades.Passives is defined and level_up.Upgrades.Passives|length > 0 %}
+                                                                <node id="PassiveSelectors">
+                                                                    <children>
+                                                                        {%- set count = 0 %}
+                                                                        {%- for passive in level_up.Upgrades.Passives %}
+                                                                        <node id="PassiveSelector">
+                                                                            <attribute id="DefinitionIndex" type="int32" value="{{ count }}"/>
+                                                                            <attribute id="ListUUID" type="guid" value="{{ passive.PassiveList }}"/>
+                                                                            <attribute id="SelectorId" type="LSString" value="{{ passive.SelectorId }}"/>
+                                                                            <children>
+                                                                                <node id="AdditionSlots">
+                                                                                    <children>
+                                                                                        {%- for name in passive.Passives %}
+                                                                                        <node id="AdditionSlot">
+                                                                                            <attribute id="Value" type="FixedString" value="{{ name }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                                {#- <!-- TODO Replacement Slots for Pasives ? --> #}
+                                                                                <node id="ReplacementSlots"/>
+                                                                                <node id="SelectorMeta">
+                                                                                    <attribute id="IsMulticlass" type="bool" value="{{ passive.Multiclass }}"/>
+                                                                                    <attribute id="Level" type="int32" value="{{ passive.Level }}"/>
+                                                                                    <attribute id="OwnerType" type="uint8" value="{{ passive.Type }}"/>
+                                                                                    <attribute id="OwnerUUID" type="guid" value="{{ passive.Class }}"/>
+                                                                                    <attribute id="ParentOwnerUUID" type="guid" value="{{ passive.Subclass }}"/>
+                                                                                </node>
+                                                                            </children>
+                                                                        </node>
+                                                                        {%- set count = count + 1 %}
+                                                                        {%- endfor %}
+                                                                    </children>
+                                                                </node>
+                                                                {%- else %}
+                                                                <node id="PassiveSelectors"/>
+                                                                {%- endif %}
+                                                                {%- if level_up.Upgrades.SkillBonuses is defined and level_up.Upgrades.SkillBonuses|length > 0 %}
+                                                                <node id="SkillExpertiseSelectors">
+                                                                    <children>
+                                                                        {%- set count = 0 %}
+                                                                        {%- for skill_bonus in level_up.Upgrades.SkillBonuses %}
+                                                                        <node id="SkillExpertiseSelector">
+                                                                            <attribute id="DefinitionIndex" type="int32" value="{{ count }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ skill_bonus.Multiclass }}"/>
+                                                                            <attribute id="Level" type="int32" value="{{ skill_bonus.Level }}"/>
+                                                                            <attribute id="ListUUID" type="guid" value="{{ skill_bonus.Skill }}"/>
+                                                                            <attribute id="Mode" type="bool" value="true"/>
+                                                                            <attribute id="OwnerType" type="uint8" value="{{ skill_bonus.Type }}"/>
+                                                                            <attribute id="OwnerUUID" type="guid" value="{{ skill_bonus.Class }}"/>
+                                                                            <attribute id="ParentOwnerUUID" type="guid" value="{{ skill_bonus.Subclass }}"/>
+                                                                            <attribute id="SelectorId" type="LSString" value=""/>
+                                                                            <children>
+                                                                                <node id="Slots">
+                                                                                    <children>
+                                                                                        {%- for value in skill.Expertise %}
+                                                                                        <node id="Slot">
+                                                                                            <attribute id="Value" type="uint8" value="{{ skill_map[value] }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                            </children>
+                                                                        </node>
+                                                                        {%- set count = count + 1 %}
+                                                                        {%- endfor %}
+                                                                    </children>
+                                                                </node>
+                                                                {%- else %}
+                                                                <node id="SkillExpertiseSelectors"/>
+                                                                {%- endif %}
+                                                                {%- if level_up.Upgrades.Skills is defined and level_up.Upgrades.Skills|length > 0 %}
+                                                                <node id="SkillSelectors">
+                                                                    <children>
+                                                                        {%- set count = 0 %}
+                                                                        {%- for skill in level_up.Upgrades.Skills %}
+                                                                        <node id="SkillSelector">
+                                                                            <attribute id="DefinitionIndex" type="int32" value="{{ count }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ skill.Multiclass }}"/>
+                                                                            <attribute id="Level" type="int32" value="{{ skill.Level }}"/>
+                                                                            <attribute id="ListUUID" type="guid" value="{{ skill.Skill }}"/>
+                                                                            <attribute id="OwnerType" type="uint8" value="{{ skill.Type }}"/>
+                                                                            <attribute id="OwnerUUID" type="guid" value="{{ skill.Class }}"/>
+                                                                            <attribute id="ParentOwnerUUID" type="guid" value="{{ skill.Subclass }}"/>
+                                                                            <attribute id="SelectorId" type="LSString" value=""/>
+                                                                            <children>
+                                                                                {%- for value in skill.Proficiencies %}
+                                                                                <node id="Slot">
+                                                                                    <attribute id="Value" type="uint8" value="{{ skill_map[value] }}"/>
+                                                                                </node>
+                                                                                {%- endfor %}
+                                                                            </children>
+                                                                        </node>
+                                                                        {%- set count = count + 1 %}
+                                                                        {%- endfor %}
+                                                                    </children>
+                                                                </node>
+                                                                {%- else %}
+                                                                <node id="SkillSelectors"/>
+                                                                {%- endif %}
+                                                                {%- if level_up.Upgrades.Spells is defined and level_up.Upgrades.Spells|length > 0 %}
+                                                                <node id="SpellSelectors">
+                                                                    <children>
+                                                                        {%- set count = 0 %}
+                                                                        {%- for spell in level_up.Upgrades.Spells %}
+                                                                        <node id="SpellSelector">
+                                                                            <attribute id="DefinitionIndex" type="int32" value="{{ count }}"/>
+                                                                            <attribute id="ListUUID" type="guid" value="{{ spell.SpellList }}"/>
+                                                                            <attribute id="SelectorId" type="LSString" value="{{ spell.SelectorId }}"/>
+                                                                            <children>
+                                                                                <node id="AdditionSlots">
+                                                                                    <children>
+                                                                                        {%- for new_spell in spell.Spells %}
+                                                                                        <node id="AdditionSlot">
+                                                                                            <attribute id="Value" type="FixedString" value="{{ new_spell }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                                <node id="ReplacementSlots">
+                                                                                    <children>
+                                                                                        {%- for old_spell in spell.ReplaceSpells %}
+                                                                                        <node id="ReplacementSlot">
+                                                                                            <attribute id="NewValue" type="FixedString" value="{{ old_spell.To }}"/>
+                                                                                            <attribute id="OldValue" type="FixedString" value="{{ old_spell.From }}"/>
+                                                                                        </node>
+                                                                                        {%- endfor %}
+                                                                                    </children>
+                                                                                </node>
+                                                                                <node id="SelectorMeta">
+                                                                                    <attribute id="IsMulticlass" type="bool" value="{{ spell.Multiclass }}"/>
+                                                                                    <attribute id="Level" type="int32" value="{{ spell.Level }}"/>
+                                                                                    <attribute id="OwnerType" type="uint8" value="{{ spell.Type }}"/>
+                                                                                    <attribute id="OwnerUUID" type="guid" value="{{ spell.Class }}"/>
+                                                                                    <attribute id="ParentOwnerUUID" type="guid" value="{{ spell.Subclass }}"/>
+                                                                                </node>
+                                                                            </children>
+                                                                        </node>
+                                                                        {%- set count = count + 1 %}
+                                                                        {%- endfor %}
+                                                                    </children>
+                                                                </node>
+                                                                {%- else %}
+                                                                <node id="SpellSelectors"/>
+                                                                {%- endif %}
+                                                            </children>
+                                                        </node>
+                                                    </children>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="PointBuyAbilities">
+                                            <children>
+                                                <node id="PointBuyAbility">
+                                                    <attribute id="Object" type="int32" value="{{ character.CharacterCreationStats.Abilities[0] }} "/>
+                                                </node>
+                                                <node id="PointBuyAbility">
+                                                    <attribute id="Object" type="int32" value="{{ character.CharacterCreationStats.Abilities[1] }}"/>
+                                                </node>
+                                                <node id="PointBuyAbility">
+                                                    <attribute id="Object" type="int32" value="{{ character.CharacterCreationStats.Abilities[2] }}"/>
+                                                </node>
+                                                <node id="PointBuyAbility">
+                                                    <attribute id="Object" type="int32" value="{{ character.CharacterCreationStats.Abilities[3] }}"/>
+                                                </node>
+                                                <node id="PointBuyAbility">
+                                                    <attribute id="Object" type="int32" value="{{ character.CharacterCreationStats.Abilities[4] }}"/>
+                                                </node>
+                                                <node id="PointBuyAbility">
+                                                    <attribute id="Object" type="int32" value="{{ character.CharacterCreationStats.Abilities[5] }}"/>
+                                                </node>
+                                                <node id="PointBuyAbility">
+                                                    <attribute id="Object" type="int32" value="{{ character.CharacterCreationStats.Abilities[6] }}"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                    </children>
+                                </node>
+                                {#- <!-- TODO Items --> #}
+                                <node id="Items">
+                                    <children>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="2"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="d47006e9-8a51-453d-b200-9e0d42e9bbab"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="0"/>
+                                                    <attribute id="IsEquipped" type="bool" value="false"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="d47006e9-8a51-453d-b200-9e0d42e9bbab"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="OBJ_Potion_Healing"/>
+                                                    <attribute id="UUID" type="guid" value="14efb687-511d-f278-79c1-78d9e5ec74a8"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="c1c3e4fb-d68c-4e10-afdc-d4550238d50e"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="1"/>
+                                                    <attribute id="IsEquipped" type="bool" value="false"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="c1c3e4fb-d68c-4e10-afdc-d4550238d50e"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="OBJ_Scroll_Revivify"/>
+                                                    <attribute id="UUID" type="guid" value="d6963b16-0fd7-c17f-f865-5c93a5ab7a90"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="ee329627-dbee-405f-b9a6-b260de9ad34c"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="144115192370824797"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="2"/>
+                                                    <attribute id="IsEquipped" type="bool" value="false"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="ee329627-dbee-405f-b9a6-b260de9ad34c"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="OBJ_Keychain"/>
+                                                    <attribute id="UUID" type="guid" value="31b54913-2f72-392f-34b9-6420aac2762a"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="b7543ff4-5010-4c01-9bcd-4da1047aebfc"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="144115192370824794"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="3"/>
+                                                    <attribute id="IsEquipped" type="bool" value="false"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="b7543ff4-5010-4c01-9bcd-4da1047aebfc"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="OBJ_Bag_AlchemyPouch"/>
+                                                    <attribute id="UUID" type="guid" value="a9f7d79a-cb25-e32e-cde5-1e8274f72ecd"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="efcb70b7-868b-4214-968a-e23f6ad586bc"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="144115192370824793"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="4"/>
+                                                    <attribute id="IsEquipped" type="bool" value="false"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="efcb70b7-868b-4214-968a-e23f6ad586bc"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="OBJ_Backpack_CampSupplies"/>
+                                                    <attribute id="UUID" type="guid" value="153d0b59-9ee9-8f99-bf5a-1d0dcf90b6c9"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="97f37571-35e8-4cc8-8b0d-ff92d20ae0bb"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="9"/>
+                                                    <attribute id="IsEquipped" type="bool" value="true"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="97f37571-35e8-4cc8-8b0d-ff92d20ae0bb"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="ARM_Shoes"/>
+                                                    <attribute id="UUID" type="guid" value="3605dfc6-0bfc-6c46-3dfc-b5778de24fd1"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="168b9099-19f5-44e4-b55c-e64ceb60b71f"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="1"/>
+                                                    <attribute id="IsEquipped" type="bool" value="true"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="168b9099-19f5-44e4-b55c-e64ceb60b71f"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="ARM_Robe_Body"/>
+                                                    <attribute id="UUID" type="guid" value="6cc2d907-38d6-93c0-7cb9-d8b899ba92c4"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="f369f4fa-2da7-4693-a147-16cfaf02bca5"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="17"/>
+                                                    <attribute id="IsEquipped" type="bool" value="true"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="f369f4fa-2da7-4693-a147-16cfaf02bca5"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="ARM_Camp_Body"/>
+                                                    <attribute id="UUID" type="guid" value="9bd384a7-c369-06a5-5531-bf609c7cbb2c"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="6bb7a595-7646-48a9-9c44-d39f16c1c5cb"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="18"/>
+                                                    <attribute id="IsEquipped" type="bool" value="true"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="6bb7a595-7646-48a9-9c44-d39f16c1c5cb"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="ARM_Camp_Shoes"/>
+                                                    <attribute id="UUID" type="guid" value="3b905245-78f7-654a-3576-442312167964"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                    </children>
+                                </node>
+                                {%- if character.PlayerPrepareSpell.Spells is defined and character.PlayerPrepareSpell.Spells|length > 0 %}
+                                <node id="PrepareSpells">
+                                    <children>
+                                        {%- for prepared in character.PlayerPrepareSpell.Spells %}
+                                        <node id="PreparedSpell">
+                                            <attribute id="OriginatorPrototype" type="FixedString" value="{{ prepared.OriginatorPrototype }}"/>
+                                            <attribute id="ProgressionSource" type="guid" value="{{ prepared.ProgressionSource }}"/>
+                                            <attribute id="SourceType" type="uint8" value="{{ spell_source_map[prepared.SourceType] }}"/>
+                                        </node>
+                                        {%- endfor %}
+                                    </children>
+                                </node>
+                                {%- else %}
+                                <node id="PrepareSpells"/>
+                                {%- endif %}
+                                {%- if character.AddedSpells.Spells is defined and character.AddedSpells.Spells|length > 0 %}
+                                <node id="Spells">
+                                    <children>
+                                        {%- for spell in character.AddedSpells.Spells %}
+                                        <node id="Spell">
+                                            <attribute id="CastResource" type="guid" value="{{ spell.SpellUUID }}"/>
+                                            <attribute id="CastingAbility" type="uint8" value="{{ attribute_map[spell.SpellCastingAbility] }}"/>
+                                            <attribute id="CooldownType" type="uint8" value="{{ cooldown_type_map[spell.CooldownType] }}"/>
+                                            {#- <!-- What is this --> #}
+                                            <attribute id="LearningStrategy" type="uint8" value="0"/>
+                                            <attribute id="SpellID" type="FixedString" value="{{ spell.SpellId.OriginatorPrototype }}"/>
+                                            <attribute id="SpellProgressionId" type="guid" value="{{ spell.SpellId.ProgressionSource }}"/>
+                                            <attribute id="SpellSourceType" type="uint8" value="{{ spell_source_map[spell.SpellId.ProgressionSource] }}"/>
+                                        </node>
+                                        {%- endfor %}
+                                    </children>
+                                </node>
+                                {%- else %}
+                                <node id="Spells"/>
+                                {%- endif %}
+                                <node id="Tags">
+                                    <children>
+                                        <node id="eoc::BackgroundTagComponent">
+                                            <children>
+                                                {%- for tag in character.BackgroundTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="eoc::ClassTagComponent">
+                                            <children>
+                                                {%- for tag in character.ClassTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="eoc::OriginAppearanceTagComponent">
+                                            <children>
+                                                {%- for tag in character.OriginAppearanceTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="eoc::OriginTagComponent">
+                                            <children>
+                                                {%- for tag in character.OriginTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="esv::tags::BoostTagComponent">
+                                            <children>
+                                                {%- for tag in character.ServerBoostTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="esv::tags::OsirisTagComponent">
+                                            <children>
+                                                {%- for tag in character.ServerOsirisTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="esv::tags::RaceTagComponent">
+                                            <children>
+                                                {%- for tag in character.ServerRaceTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                        <node id="esv::tags::TemplateTagComponent">
+                                            <children>
+                                                {%- for tag in character.ServerTemplateTag.Tags %}
+                                                <node id="Tags">
+                                                    <attribute id="Object" type="guid" value="{{ tag }}"/>
+                                                </node>
+                                                {%- endfor %}
+                                            </children>
+                                        </node>
+                                    </children>
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>
