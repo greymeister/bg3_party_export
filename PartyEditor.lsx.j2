@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <save>
-    <version major="4" minor="0" revision="9" build="319"/>
+    <version major="4" minor="0" revision="9" build="327"/>
     <region id="PartyPreset">
         <node id="root">
             <children>
@@ -8,15 +8,27 @@
                     <children>
                         {#- <!-- TODO loop over for each character, now just does 1 --> #}
                         <node id="Preset">
-                            <attribute id="CharacterUUID" type="guid" value="{{ character.ServerCharacter.Template.Id }}"/>
                             <attribute id="FactionId" type="guid" value="{{ character.ServerCharacter.Template.CombatComponent.Faction }}"/>
-                            {#- <!-- TODO What should this be --> #}
+                            {#-
+                            <!-- Seems to have issues using values from SE, just using static for now -->
                             <attribute id="Level" type="FixedString" value="{{ character.ServerCharacter.Level }}"/>
                             <attribute id="Position" type="fvec3">
                                 <float3 x="{{ character.Transform.Transform.Translate[0] }}" y="{{ character.Transform.Transform.Translate[1] }}" z="{{ character.Transform.Transform.Translate[2] }}"/>
                             </attribute>
                             <attribute id="Rotation" type="fvec4">
                                 <float4 x="{{ character.Bound.Bound.RotationQuat[0] }}" y="{{ character.Bound.Bound.RotationQuat[1] }}" z="{{ character.Bound.Bound.RotationQuat[2] }}" w="{{ character.Bound.Bound.RotationQuat[3] }}"/>
+                            </attribute>
+                            #}
+                            <attribute id="Level" type="FixedString" value="TUT_Avernus_C"/>
+                            <attribute id="Position" type="fvec3">
+                                <float3 x="-10.169522" y="16.97168" z="-426.87961"/>
+                            </attribute>
+                            <attribute id="Rotation" type="mat3x3">
+                                <mat3>
+                                    <float3 x="0.66773021" y="0" z="0.74440342"/>
+                                    <float3 x="0" y="1" z="0"/>
+                                    <float3 x="-0.74440342" y="0" z="0.66773021"/>
+                                </mat3>
                             </attribute>
                             <attribute id="TotalExperience" type="int32" value="{{ character.Experience.TotalExperience }}"/>
                             <children>
@@ -48,6 +60,7 @@
                                                         {%- endfor %}
                                                     </children>
                                                 </node>
+                                                <node id="ScalarParameters"/>
                                                 <node id="Visuals">
                                                     <children>
                                                         {%- for visual in character.CharacterCreationAppearance.Visuals %}
@@ -573,7 +586,7 @@
                                                     <attribute id="CanBePickedUp" type="bool" value="false"/>
                                                     <attribute id="CanBeUsed" type="bool" value="false"/>
                                                     <attribute id="CanUse" type="bool" value="false"/>
-                                                    <attribute id="ID" type="FixedString" value="168b9099-19f5-44e4-b55c-e64ceb60b71f"/>
+                                                    <attribute id="ID" type="FixedString" value="799fd23a-8e18-4642-8650-521dd7880c2b"/>
                                                     <attribute id="INVISIBLE" type="bool" value="false"/>
                                                     <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
                                                     <attribute id="InventorySlot" type="uint16" value="1"/>
@@ -583,9 +596,9 @@
                                                     <attribute id="Key" type="FixedString" value=""/>
                                                     <attribute id="Known" type="bool" value="false"/>
                                                     <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
-                                                    <attribute id="OriginalTemplate" type="FixedString" value="168b9099-19f5-44e4-b55c-e64ceb60b71f"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="799fd23a-8e18-4642-8650-521dd7880c2b"/>
                                                     <attribute id="Parent" type="uint64" value="18428729675200069632"/>
-                                                    <attribute id="StatsID" type="FixedString" value="ARM_Robe_Body"/>
+                                                    <attribute id="StatsID" type="FixedString" value="ARM_Robe_CultOfAbsolute"/>
                                                     <attribute id="UUID" type="guid" value="6cc2d907-38d6-93c0-7cb9-d8b899ba92c4"/>
                                                     <attribute id="UnEquipLocked" type="bool" value="false"/>
                                                     <attribute id="UseRemotely" type="bool" value="false"/>
@@ -650,6 +663,35 @@
                                                 </node>
                                             </children>
                                         </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="d692d48f-9a39-4001-8a38-c01e397953dc"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="8"/>
+                                                    <attribute id="IsEquipped" type="bool" value="true"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="dd692d48f-9a39-4001-8a38-c01e397953dc"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="ARM_Underwear_Gnomes"/>
+                                                    <attribute id="UUID" type="guid" value="a6d0569b-70c0-e76a-972a-28029e9c7b53"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
                                     </children>
                                 </node>
                                 {%- if character.PlayerPrepareSpell.Spells is defined and character.PlayerPrepareSpell.Spells|length > 0 %}
@@ -667,7 +709,7 @@
                                 {%- else %}
                                 <node id="PrepareSpells"/>
                                 {%- endif %}
-                                {%- if character.AddedSpells.Spells is defined and character.AddedSpells.Spells|length > 0 and 0 > 1 %}
+                                {%- if character.AddedSpells.Spells is defined and character.AddedSpells.Spells|length > 0 %}
                                 <node id="Spells">
                                     <children>
                                         {%- for spell in character.AddedSpells.Spells %}
@@ -679,7 +721,7 @@
                                             <attribute id="LearningStrategy" type="uint8" value="0"/>
                                             <attribute id="SpellID" type="FixedString" value="{{ spell.SpellId.OriginatorPrototype }}"/>
                                             <attribute id="SpellProgressionId" type="guid" value="{{ spell.SpellId.ProgressionSource }}"/>
-                                            <attribute id="SpellSourceType" type="uint8" value="{{ spell_source_map[spell.SpellId.ProgressionSource] }}"/>
+                                            <attribute id="SpellSourceType" type="uint8" value="{{ spell_source_map[spell.SpellId.SourceType] }}"/>
                                         </node>
                                         {%- endfor %}
                                     </children>

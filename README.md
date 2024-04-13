@@ -52,11 +52,15 @@ created  from the previous command.  Now start a new game and when the BG3SE con
 LoadPartyPreset("<your-party-editor>", "true")
 ```
 
+After that, save and load (or go to main menu and load if Honour mode is on) as stats and spell slots are wonky.
+
 ## Status *IN Progress*
 
 This is still very much a work in progress.  Items are not being handled properly, and it only handles single character
 export.  Still working on the following:
 
+* Faction messed up
+* Rock Gnomes can't move?
 * Icon Fix (currently need to respec/change appearance to fix)
 * Inventory
 * Specifying Teleport Location
