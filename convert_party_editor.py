@@ -14,10 +14,10 @@ def load_se_json(filename):
         data = json.load(file, object_hook=lambda d: SimpleNamespace(**d))
         return data
 
-def generate_template(character):
+def generate_template(characters):
     with open('PartyEditor.lsx.j2') as f:
         template = Template(f.read())
-        output_text = template.render(character=character,
+        output_text = template.render(characters=characters,
                                       attribute_map=attribute_map,
                                       skill_map=skill_map,
                                       spell_source_map=spell_source_map,
@@ -27,12 +27,14 @@ def generate_template(character):
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
         print("""
-    Usage: python convert_party_editor.py <input filename>
-    Example: python convert_party_editor.py character.json
+    Usage: python convert_party_editor.py <input filename> [input filename 2] ...
+    Example: python convert_party_editor.py character1.json character2.json > party.lsx
     """)
         sys.exit(2)
 
-    filename = sys.argv[1]
-    character = load_se_json(filename)
-    lsx = generate_template(character)
+    characters = []
+    for filename in sys.argv[1:]:
+        character = load_se_json(filename)
+        characters.append(character)
+    lsx = generate_template(characters)
     print(lsx)

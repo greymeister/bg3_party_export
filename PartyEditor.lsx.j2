@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <save>
-    {%- set origin = character.ServerCharacter.Template.TemplateName is defined and character.ServerCharacter.Template.TemplateName|length > 0 %}
     {%- set factions = ["6545a015-1b3d-66a4-6a0e-6ec62065cdb7", "9fac6ec7-642b-3553-1bc8-6b8e0edae7d5", "286958be-0845-b4ee-611f-1a9c27dcbe10", "e69da880-4178-0d67-846d-bf65f8750ce3"] %}
     <version major="4" minor="0" revision="9" build="327"/>
     <region id="PartyPreset">
@@ -8,7 +7,8 @@
             <children>
                 <node id="Presets">
                     <children>
-                        {#- <!-- TODO loop over for each character, now just does 1 --> #}
+                        {%- for character in characters %}
+                        {%- set origin = character.ServerCharacter.Template.TemplateName is defined and character.ServerCharacter.Template.TemplateName|length > 0 %}
                         <node id="Preset">
                             {%- if origin %}
                             <attribute id="CharacterUUID" type="guid" value="{{ character.ServerCharacter.Template.Id }}"/>
@@ -838,6 +838,7 @@
                                 </node>
                             </children>
                         </node>
+                        {%- endfor %}
                     </children>
                 </node>
             </children>
