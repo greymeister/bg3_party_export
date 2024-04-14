@@ -111,11 +111,7 @@
                                             <attribute id="RootTemplateID" type="guid" value="{{ character.ServerCharacter.Template.Id }}"/>
                                             {%- endif %}
                                             <attribute id="SubRace" type="guid" value="{{ character.CharacterCreationStats.SubRace }}"/>
-                                            {%- if origin %}
-                                            <attribute id="Voice" type="guid" value="00000000-0000-0000-0000-000000000000"/>
-                                            {%- else %}
                                             <attribute id="Voice" type="guid" value="{{ character.Voice.Voice }}"/>
-                                            {%- endif %}
                                         </node>
                                         <node id="LearnedSpells"/>
                                         <node id="LevelUps">
@@ -782,6 +778,7 @@
                                                 {%- endfor %}
                                             </children>
                                         </node>
+                                        {%- if character.OriginAppearanceTag.Tags is defined and character.OriginAppearanceTag.Tags|length > 0 %}
                                         <node id="eoc::OriginAppearanceTagComponent">
                                             <children>
                                                 {%- for tag in character.OriginAppearanceTag.Tags %}
@@ -791,6 +788,7 @@
                                                 {%- endfor %}
                                             </children>
                                         </node>
+                                        {%- endif %}
                                         <node id="eoc::OriginTagComponent">
                                             <children>
                                                 {%- for tag in character.OriginTag.Tags %}
