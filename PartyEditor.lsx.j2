@@ -8,6 +8,7 @@
                     <children>
                         {#- <!-- TODO loop over for each character, now just does 1 --> #}
                         <node id="Preset">
+                            <attribute id="CharacterUUID" type="guid" value="{{ character.ServerCharacter.Template.Id }}"/>
                             <attribute id="FactionId" type="guid" value="{{ character.ServerCharacter.Template.CombatComponent.Faction }}"/>
                             {#-
                             <!-- Seems to have issues using values from SE, just using static for now -->
@@ -35,7 +36,13 @@
                                 <node id="BlockedDebugTags"/>
                                 <node id="DebugTags"/>
                                 <node id="FullDefinition">
+                                    {%- if character.CharacterCreationStats.Name is defined and character.CharacterCreationStats.Name|length > 0 %}
                                     <attribute id="CustomName" type="LSString" value="{{ character.CharacterCreationStats.Name }}"/>
+                                    {%- elif character.Origin.Origin is defined and character.Origin.Origin|length > 0 %}
+                                    <attribute id="CustomName" type="LSString" value="{{ character.Origin.Origin }}"/>
+                                    {%- else %}
+                                    <attribute id="CustomName" type="LSString" value="Nameless"/>
+                                    {%- endif %}
                                     <children>
                                         <node id="Appearance">
                                             {#- <!-- TODO Check if this is the right place to get AccessorySet --> #}
@@ -61,6 +68,7 @@
                                                     </children>
                                                 </node>
                                                 <node id="ScalarParameters"/>
+                                                {%- if character.CharacterCreationAppearance.Visuals is defined and character.CharacterCreationAppearance.Visuals|length > 0 %}
                                                 <node id="Visuals">
                                                     <children>
                                                         {%- for visual in character.CharacterCreationAppearance.Visuals %}
@@ -70,6 +78,9 @@
                                                         {%- endfor %}
                                                     </children>
                                                 </node>
+                                                {%- else %}
+                                                <node id="Visuals"/>
+                                                {%- endif %}
                                             </children>
                                         </node>
                                         <node id="Basics">
