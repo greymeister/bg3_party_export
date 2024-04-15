@@ -126,11 +126,12 @@ spell_source_map = {
     "ActiveDefense": "18",
     "Learned": "19",
     "Progression": "20",
+    "Unknown15": "21",
     "Unknown16": "22",
-    "Unknown17": "21",
-    "Unknown18": "21",
-    "Unknown19": "21",
-    "Unknown1A": "21",
+    "Unknown17": "23",
+    "Unknown18": "24",
+    "Unknown19": "25",
+    "Unknown1A": "26",
     "Sentinel": "27"
 }
 

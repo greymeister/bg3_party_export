@@ -124,6 +124,7 @@ If your preset is an Origin Oathbreaker I guess just wait until you level up ðŸ’
 This is still very much a work in progress.  Still working on the following:
 
 * Icon Fix (currently need to respec/change appearance to fix)
+* Wizard Learned Spells
 
 Would like to fix/implement the following:
 
