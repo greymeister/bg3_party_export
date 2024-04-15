@@ -13,8 +13,7 @@
                             {%- if origin %}
                             <attribute id="CharacterUUID" type="guid" value="{{ character.ServerCharacter.Template.Id }}"/>
                             {%- endif %}
-                            {#- <!-- Faction Hero player 6545a015-1b3d-66a4-6a0e-6ec62065cdb7,9fac6ec7-642b-3553-1bc8-6b8e0edae7d5,286958be-0845-b4ee-611f-1a9c27dcbe10,e69da880-4178-0d67-846d-bf65f8750ce3 --> #}
-                            <attribute id="FactionId" type="guid" value="{{ character.Faction.field_8 }}"/>
+                            <attribute id="FactionId" type="guid" value="{{ factions[loop.index0] }}"/>
                             {#-
                             <!-- Seems to have issues using values from SE, just using static for now -->
                             <attribute id="Level" type="FixedString" value="{{ character.ServerCharacter.Level }}"/>
@@ -105,7 +104,7 @@
                                             <attribute id="Identity" type="uint8" value="{{ character.Identity.field_0 }}"/>
                                             <attribute id="Origin" type="guid" value="{{ character.Origin.field_18 }}"/>
                                             <attribute id="Race" type="guid" value="{{ character.CharacterCreationStats.Race }}"/>
-                                            {%- if character.ServerCharacter.Template.TemplateName is defined and character.ServerCharacter.Template.TemplateName|length > 0 %}
+                                            {%- if origin %}
                                             <attribute id="RootTemplateID" type="guid" value="{{ character.ServerCharacter.Template.TemplateName }}"/>
                                             {%- else %}
                                             <attribute id="RootTemplateID" type="guid" value="{{ character.ServerCharacter.Template.Id }}"/>
@@ -716,6 +715,35 @@
                                                     <attribute id="Parent" type="uint64" value="18428729675200069632"/>
                                                     <attribute id="StatsID" type="FixedString" value="ARM_Underwear_Gnomes"/>
                                                     <attribute id="UUID" type="guid" value="a6d0569b-70c0-e76a-972a-28029e9c7b53"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="1"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="d9c87013-1f41-4c17-b71d-f353ec0d64e8"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="5"/>
+                                                    <attribute id="IsEquipped" type="bool" value="false"/>
+                                                    <attribute id="IsKey" type="bool" value="false"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="Common"/>
+                                                    <attribute id="Key" type="FixedString" value=""/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="d9c87013-1f41-4c17-b71d-f353ec0d64e8"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="WPN_Club"/>
+                                                    <attribute id="UUID" type="guid" value="62d6ee50-a705-ef89-e0ee-1abce9a07fb5"/>
                                                     <attribute id="UnEquipLocked" type="bool" value="false"/>
                                                     <attribute id="UseRemotely" type="bool" value="false"/>
                                                 </node>

@@ -25,9 +25,9 @@ def generate_template(characters):
     return output_text
 
 if __name__ == "__main__":
-    if len(sys.argv) <= 1:
+    if len(sys.argv) <= 1 or len(sys.argv) > 5:
         print("""
-    Usage: python convert_party_editor.py <input filename> [input filename 2] ...
+    Usage: python convert_party_editor.py <input filename> [input filename 2] [input filename 3] [input filename 4]
     Example: python convert_party_editor.py character1.json character2.json > party.lsx
     """)
         sys.exit(2)

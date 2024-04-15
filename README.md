@@ -24,7 +24,8 @@ This will create a file `charname.json` in your `AppData/Local/Larian Studios/Ba
 I suggest you name it after your character, but it really doesn't matter.
 
 **Important** At least one of the characters you export needs to have been an avatar or else the game can't properly load
-the party.
+the party.  It also seems to only assign avatar status to the last such character you combine.  Unlike in MP games, you will
+only have one "avatar" character with this setup.
 
 Then using this project you can run using python 3.11+ with either of the following options from the directory you have it:
 
@@ -79,6 +80,7 @@ _Purge=GetHostCharacter()
 Then, after loading the party preset and making sure things look right, run the following [source](https://old.reddit.com/r/BaldursGate3/comments/15qb8lu/guide_removing_custom_multiplayer_party_members/):
 
 ```
+--[[
 MakeNPC(_Purge)
 SetFaction(_Purge, "NPC_cfb709b3-220f-9682-bcfb-6f0d8837462e")
 SetHasDialog(_Purge, 0)
@@ -93,6 +95,7 @@ Osi.PROC_RemoveAllDialogEntriesForSpeaker(_Purge)
 SetImmortal(_Purge, 0)
 Die(_Purge, 0, "NULL_00000000-0000-0000-0000-000000000000", 0, 0)
 Osi.PROC_CheckPartyFull()
+]]--
 ```
 
 This cleans references but I'll need to do more testing to see if anything breaks downstream due to a script bug etc.
