@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <save>
     {%- set factions = ["6545a015-1b3d-66a4-6a0e-6ec62065cdb7", "9fac6ec7-642b-3553-1bc8-6b8e0edae7d5", "286958be-0845-b4ee-611f-1a9c27dcbe10", "e69da880-4178-0d67-846d-bf65f8750ce3"] %}
-    <version major="4" minor="0" revision="9" build="327"/>
+    <version major="4" minor="0" revision="9" build="328"/>
     <region id="PartyPreset">
         <node id="root">
             <children>
@@ -148,11 +148,26 @@
                                                                 </node>
                                                             </children>
                                                         </node>
+                                                        {#- <!-- TODO It seems like the templates preserve the chosen prepared spells for each level, instead just use the last list --> #}
+                                                        {%- if loop.last and character.CCPrepareSpell.Spells is defined and character.CCPrepareSpell.Spells|length > 0 %}
+                                                        <node id="PreparedSpells">
+                                                            <children>
+                                                                {%- for spell in character.CCPrepareSpell.Spells %}
+                                                                <node id="PreparedSpellSlot">
+                                                                    <attribute id="OriginatorPrototype" type="FixedString" value="{{ spell.OriginatorPrototype }}"/>
+                                                                    <attribute id="ProgressionSource" type="guid" value="{{ spell.ProgressionSource }}"/>
+                                                                    <attribute id="SourceType" type="uint8" value="{{ spell_source_map[spell.SourceType] }}"/>
+                                                                </node>
+                                                                {%- endfor %}
+                                                            </children>
+                                                        </node>
+                                                        {%- else %}
                                                         <node id="PreparedSpells">
                                                             <children>
                                                                 <node id="PreparedSpellSlots"/>
                                                             </children>
                                                         </node>
+                                                        {%- endif %}
                                                         <node id="Selectors">
                                                             <children>
                                                                 {%- if level_up.Upgrades.AbilityBonuses is defined and level_up.Upgrades.AbilityBonuses|length > 0 %}
@@ -161,7 +176,7 @@
                                                                         {%- for ability_bonus in level_up.Upgrades.AbilityBonuses %}
                                                                         <node id="AbilityBonusSelector">
                                                                             <attribute id="DefinitionIndex" type="int32" value="{{ loop.index0 }}"/>
-                                                                            <attribute id="IsMulticlass" type="bool" value="{{ ability_bonus.Multiclass }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ ability_bonus.Multiclass|string|lower }}"/>
                                                                             <attribute id="Level" type="int32" value="{{ ability_bonus.Level }}"/>
                                                                             <attribute id="ListUUID" type="guid" value="{{ ability_bonus.AbilityBonus }}"/>
                                                                             <attribute id="OwnerType" type="uint8" value="{{ ability_bonus.Type }}"/>
@@ -201,7 +216,7 @@
                                                                         {%- for feat in level_up.Upgrades.Feats %}
                                                                         <node id="AbilitySelector">
                                                                             <attribute id="DefinitionIndex" type="int32" value="{{ loop.index0 }}"/>
-                                                                            <attribute id="IsMulticlass" type="bool" value="{{ feat.Multiclass }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ feat.Multiclass|string|lower }}"/>
                                                                             <attribute id="Level" type="int32" value="{{ feat.Level }}"/>
                                                                             <attribute id="ListUUID" type="guid" value="{{ feat.Feat }}"/>
                                                                             <attribute id="OwnerType" type="uint8" value="{{ feat.Type }}"/>
@@ -232,7 +247,7 @@
                                                                         {%- for equipment in level_up.Upgrades.Equipment %}
                                                                         <node id="EquipmentSelector">
                                                                             <attribute id="DefinitionIndex" type="int32" value="{{ loop.index0 }}"/>
-                                                                            <attribute id="IsMulticlass" type="bool" value="{{ equipment.Multiclass }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ equipment.Multiclass|string|lower }}"/>
                                                                             <attribute id="Level" type="int32" value="{{ equipment.Level }}"/>
                                                                             <attribute id="ListUUID" type="guid" value="{{ equipment.EquipmentList }}"/>
                                                                             <attribute id="OwnerType" type="uint8" value="{{ equipment.Type }}"/>
@@ -278,7 +293,7 @@
                                                                                 {#- <!-- TODO Replacement Slots for Passives ? --> #}
                                                                                 <node id="ReplacementSlots"/>
                                                                                 <node id="SelectorMeta">
-                                                                                    <attribute id="IsMulticlass" type="bool" value="{{ passive.Multiclass }}"/>
+                                                                                    <attribute id="IsMulticlass" type="bool" value="{{ passive.Multiclass|string|lower }}"/>
                                                                                     <attribute id="Level" type="int32" value="{{ passive.Level }}"/>
                                                                                     <attribute id="OwnerType" type="uint8" value="{{ passive.Type }}"/>
                                                                                     <attribute id="OwnerUUID" type="guid" value="{{ passive.Class }}"/>
@@ -298,7 +313,7 @@
                                                                         {%- for skill_bonus in level_up.Upgrades.SkillBonuses %}
                                                                         <node id="SkillExpertiseSelector">
                                                                             <attribute id="DefinitionIndex" type="int32" value="{{ loop.index0 }}"/>
-                                                                            <attribute id="IsMulticlass" type="bool" value="{{ skill_bonus.Multiclass }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ skill_bonus.Multiclass|string|lower }}"/>
                                                                             <attribute id="Level" type="int32" value="{{ skill_bonus.Level }}"/>
                                                                             <attribute id="ListUUID" type="guid" value="{{ skill_bonus.Skill }}"/>
                                                                             <attribute id="Mode" type="bool" value="true"/>
@@ -330,7 +345,7 @@
                                                                         {%- for skill in level_up.Upgrades.Skills %}
                                                                         <node id="SkillSelector">
                                                                             <attribute id="DefinitionIndex" type="int32" value="{{ loop.index0 }}"/>
-                                                                            <attribute id="IsMulticlass" type="bool" value="{{ skill.Multiclass }}"/>
+                                                                            <attribute id="IsMulticlass" type="bool" value="{{ skill.Multiclass|string|lower }}"/>
                                                                             <attribute id="Level" type="int32" value="{{ skill.Level }}"/>
                                                                             <attribute id="ListUUID" type="guid" value="{{ skill.Skill }}"/>
                                                                             <attribute id="OwnerType" type="uint8" value="{{ skill.Type }}"/>
@@ -338,11 +353,15 @@
                                                                             <attribute id="ParentOwnerUUID" type="guid" value="{{ skill.Subclass }}"/>
                                                                             <attribute id="SelectorId" type="LSString" value=""/>
                                                                             <children>
-                                                                                {%- for value in skill.Proficiencies %}
-                                                                                <node id="Slot">
-                                                                                    <attribute id="Value" type="uint8" value="{{ skill_map[value] }}"/>
+                                                                                <node id="Slots">
+                                                                                    <children>
+                                                                                    {%- for value in skill.Proficiencies %}
+                                                                                    <node id="Slot">
+                                                                                        <attribute id="Value" type="uint8" value="{{ skill_map[value] }}"/>
+                                                                                    </node>
+                                                                                    {%- endfor %}
+                                                                                    </children>
                                                                                 </node>
-                                                                                {%- endfor %}
                                                                             </children>
                                                                         </node>
                                                                         {%- endfor %}
@@ -369,6 +388,7 @@
                                                                                         {%- endfor %}
                                                                                     </children>
                                                                                 </node>
+                                                                                {%- if spell.ReplaceSpells is defined and spell.ReplaceSpells|length > 0 %}
                                                                                 <node id="ReplacementSlots">
                                                                                     <children>
                                                                                         {%- for old_spell in spell.ReplaceSpells %}
@@ -379,8 +399,11 @@
                                                                                         {%- endfor %}
                                                                                     </children>
                                                                                 </node>
+                                                                                {%- else %}
+                                                                                <node id="ReplacementSlots"/>
+                                                                                {%- endif %}
                                                                                 <node id="SelectorMeta">
-                                                                                    <attribute id="IsMulticlass" type="bool" value="{{ spell.Multiclass }}"/>
+                                                                                    <attribute id="IsMulticlass" type="bool" value="{{ spell.Multiclass|string|lower }}"/>
                                                                                     <attribute id="Level" type="int32" value="{{ spell.Level }}"/>
                                                                                     <attribute id="OwnerType" type="uint8" value="{{ spell.Type }}"/>
                                                                                     <attribute id="OwnerUUID" type="guid" value="{{ spell.Class }}"/>
