@@ -73,8 +73,11 @@ After that, save and load (or go to main menu and load if Honour mode is on) as 
 
 Run the following command from the script console before you load the party preset:
 
+**Note** previously I had `_Purge=GetHostCharacter()` but based on the values I'm seeing in the DB that's not what the
+game is using.
+
 ```
-_Purge=GetHostCharacter()
+_Purge=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
 ```
 
 Then, after loading the party preset and making sure things look right, run the following [source](https://old.reddit.com/r/BaldursGate3/comments/15qb8lu/guide_removing_custom_multiplayer_party_members/):
@@ -119,6 +122,25 @@ Osi.StartRespec(GetHostCharacter())
 
 If your preset is an Origin Oathbreaker I guess just wait until you level up 💩
 
+### Fixing Avatar Status
+
+If you import multiple Tavs only the last one in the resulting lsx file will be marked as an avatar.  It seems like the
+`LoadPartyPreset` function strips the avatar tag off of the other characters.  It also can cause issues where these
+characters aren't able to travel to camp.  If you don't find this desirable you can run the following
+script:
+
+```
+_UUID=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
+--[[
+Osi.DB_Players(_UUID)
+Osi.DB_Avatars(_UUID)
+Osi.DB_PartOfTheTeam(_UUID)
+Osi.PROC_CheckPartyFull()
+]]--
+```
+
+Then save and reload, your characters should be marked as avatars and be able to visit camp etc.
+
 ## Status *WIP*
 
 This is still very much a work in progress.  Still working on the following:
@@ -131,5 +153,6 @@ Would like to fix/implement the following:
 * Statuses
 * Tadpole Powers
 * Inventory
+* Custom/Modded Origins Working
 
 Unfortunately I can only go by existing examples as there is no real specification or guide to what they can contain.
