@@ -113,7 +113,20 @@
                                             <attribute id="Voice" type="guid" value="{{ character.Voice.Voice }}"/>
                                         </node>
                                         {#-  <!-- TODO No example of how to populate this --> #}
+                                        {%- if character.LearnedSpells.field_18["a865965f-501b-46e9-9eaa-7748e8c04d09"]|length > 0  and 0 > 1%}
+                                        <node id="LearnedSpells">
+                                            <children>
+                                                <node id="LearnedSpell">
+                                                    <attribute id="ProgressionSource" type="guid" value="a865965f-501b-46e9-9eaa-7748e8c04d09"/>
+                                                    <children>
+                                                        <node id="Zone_GustOfWind"/>
+                                                    </children>
+                                                </node>
+                                            </children>
+                                        </node>
+                                        {%- else %}
                                         <node id="LearnedSpells"/>
+                                        {%- endif %}
                                         <node id="LevelUps">
                                             <children>
                                                 {%- for level_up in character.CCLevelUp.LevelUps %}
@@ -149,10 +162,10 @@
                                                             </children>
                                                         </node>
                                                         {#- <!-- TODO It seems like the templates preserve the chosen prepared spells for each level, instead just use the last list --> #}
-                                                        {%- if loop.last and character.CCPrepareSpell.Spells is defined and character.CCPrepareSpell.Spells|length > 0 %}
+                                                        {%- if loop.last and character.PlayerPrepareSpell.Spells is defined and character.PlayerPrepareSpell.Spells|length > 0 %}
                                                         <node id="PreparedSpells">
                                                             <children>
-                                                                {%- for spell in character.CCPrepareSpell.Spells %}
+                                                                {%- for spell in character.PlayerPrepareSpell.Spells %}
                                                                 <node id="PreparedSpellSlot">
                                                                     <attribute id="OriginatorPrototype" type="FixedString" value="{{ spell.OriginatorPrototype }}"/>
                                                                     <attribute id="ProgressionSource" type="guid" value="{{ spell.ProgressionSource }}"/>
