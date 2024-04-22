@@ -135,6 +135,7 @@ _UUID=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
 Osi.DB_Players(_UUID)
 Osi.DB_Avatars(_UUID)
 Osi.DB_PartOfTheTeam(_UUID)
+SetTag(GetHostCharacter(), "306b9b05-1057-4770-aa17-01af21acd650")
 Osi.PROC_CheckPartyFull()
 ]]--
 ```
