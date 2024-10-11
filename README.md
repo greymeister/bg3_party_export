@@ -101,7 +101,7 @@ Osi.PROC_CheckPartyFull()
 ]]--
 ```
 
-This cleans references but I'll need to do more testing to see if anything breaks downstream due to a script bug etc.
+This cleans references, but I'll need to do more testing to see if anything breaks downstream due to a script bug etc.
 
 **Note** Do this *before* you save/load or else `_Purge` will be undefined.
 
@@ -126,8 +126,7 @@ If your preset is an Origin Oathbreaker I guess just wait until you level up ðŸ’
 
 If you import multiple Tavs only the last one in the resulting lsx file will be marked as an avatar.  It seems like the
 `LoadPartyPreset` function strips the avatar tag off of the other characters.  It also can cause issues where these
-characters aren't able to travel to camp.  If you don't find this desirable you can run the following
-script:
+characters aren't able to travel to camp.  If you don't find this desirable you can run the following  script:
 
 ```
 _UUID=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
@@ -146,8 +145,8 @@ Then save and reload, your characters should be marked as avatars and be able to
 
 This is still very much a work in progress.  Still working on the following:
 
-* Icon Fix (currently need to respec/change appearance to fix)
 * Wizard Learned Spells
+* Inventory
 
 Would like to fix/implement the following:
 
