@@ -14,6 +14,8 @@ And of course to Larian for making an amazing game.
 
 ## Usage
 
+### Export Characters 
+
 First, this requires [BG3SE](https://github.com/Norbyte/bg3se/) to make use of.  Launch the game with the script console
 enabled as per the instructions of that project, and when you have the game loaded, run the following in the console:
 
@@ -80,31 +82,19 @@ I suggest you name it after your character, but it really doesn't matter.
 the party.  It also seems to only assign avatar status to the last such character you combine.  Unlike in MP games, you will
 only have one "avatar" character with this setup.
 
-Then using this project you can run using python 3.11+ with either of the following options from the directory you have it:
+### Create Party Preset
 
-1. With pipenv available:
-
-```shell
-pipenv install
-pipenv shell
-```
-
-2. Without pipenv:
+Unzip or extract the convert_party_editor.zip to a location on your computer.  Change to that directory and 
+run the following:
 
 ```shell
-pip install -r requirements.txt
-```
-
-After doing either 1) or 2), then run the following:
-
-```shell
-python convert_party_editor.py charname.json > party.lsx
+convert_party_editor.exe charname.json > party.lsx
 ```
 
 If you'd like to have more than one character, simply export multiple character json files with SE and then run like this:
 
 ```shell
-python convert_party_editor.py file1.json file2.json file3.json file4.json > party.lsx
+convert_party_editor.exe file1.json file2.json file3.json file4.json > party.lsx
 ```
 
 Then create a directory in your BG3 Installation directory `Data/Mods/GustavDev/Story/PartyEditor` and place the lsx file
@@ -194,6 +184,25 @@ I have not had a chance to use the new Larian Toolkit, and not sure if that will
 read a wizard's learned spells and populate the party preset and have it import properly.
 
 What I plan to do is generate the scrolls for a character's learned spells and add those to the inventory.
+
+## Building
+
+See [BUILD.txt](./BUILD.txt) for more info.
+
+You can run this project using python 3.12+ with either of the following options from the directory you have it:
+
+1. With pipenv available:
+
+```shell
+pipenv install
+pipenv shell
+```
+
+2. Without pipenv:
+
+```shell
+pip install -r requirements.txt
+```
 
 ## Status *WIP*
 
