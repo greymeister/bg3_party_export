@@ -8,6 +8,7 @@ Jinja2 = "*"
 
 
 [dev-packages]
+pyinstaller = "*"
 
 [requires]
 python_version = "3.11"

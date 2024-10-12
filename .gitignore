@@ -5,3 +5,5 @@ Pipfile.lock
 *.bak
 SE.lnk
 PE.lnk
+build/
+dist/
