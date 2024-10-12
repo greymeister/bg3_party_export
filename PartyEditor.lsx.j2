@@ -103,7 +103,13 @@
                                             <attribute id="Background" type="guid" value="{{ character.Background.Background }}"/>
                                             <attribute id="BodyShape" type="uint8" value="{{ character.CharacterCreationStats.BodyShape }}"/>
                                             <attribute id="BodyType" type="uint8" value="{{ character.CharacterCreationStats.BodyType }}"/>
+                                            {%- if character.God is defined and character.God.God|length > 0 %}
                                             <attribute id="God" type="guid" value="{{ character.God.God }}"/>
+                                            {%- elif character.ServerCCGod is defined and character.ServerCCGod.God|length > 0 %}
+                                            <attribute id="God" type="guid" value="{{ character.ServerCCGod.God }}"/>
+                                            {%- else %}
+                                            <attribute id="God" type="guid" value="00000000-0000-0000-0000-000000000000"/>
+                                            {%- endif %}
                                             <attribute id="Identity" type="uint8" value="{{ character.Identity.field_0 }}"/>
                                             <attribute id="Origin" type="guid" value="{{ character.Origin.field_18 }}"/>
                                             <attribute id="Race" type="guid" value="{{ character.CharacterCreationStats.Race }}"/>
@@ -467,7 +473,43 @@
                                         </node>
                                     </children>
                                 </node>
-                                {#- <!-- TODO Items --> #}
+                                {%- if character.ImportedInventory is defined %}
+                                <node id="Items">
+                                    <children>
+                                        {%- for item in character.ImportedInventory %}
+                                        <node id="Item">
+                                            <attribute id="Level" type="FixedString" value=""/>
+                                            <children>
+                                                <node id="ItemDefinition">
+                                                    <attribute id="Active" type="bool" value="false"/>
+                                                    <attribute id="Amount" type="int32" value="{{ item.Amount }}"/>
+                                                    <attribute id="CanBeMoved" type="bool" value="false"/>
+                                                    <attribute id="CanBePickedUp" type="bool" value="false"/>
+                                                    <attribute id="CanBeUsed" type="bool" value="false"/>
+                                                    <attribute id="CanUse" type="bool" value="false"/>
+                                                    <attribute id="ID" type="FixedString" value="{{ item.ID }}"/>
+                                                    <attribute id="INVISIBLE" type="bool" value="false"/>
+                                                    <attribute id="Inventory" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="InventorySlot" type="uint16" value="{{ item.InventorySlot }}"/>
+                                                    <attribute id="IsEquipped" type="bool" value="{{ item.IsEquipped }}"/>
+                                                    <attribute id="IsKey" type="bool" value="{{ item.IsKey }}"/>
+                                                    <attribute id="ItemGroup" type="FixedString" value="{{ item.ItemGroup }}"/>
+                                                    <attribute id="Key" type="FixedString" value="{{ item.Key }}"/>
+                                                    <attribute id="Known" type="bool" value="false"/>
+                                                    <attribute id="LockDifficultyClassID" type="guid" value="{{ item.LockDifficultyClassID }}"/>
+                                                    <attribute id="OriginalTemplate" type="FixedString" value="{{ item.ID }}"/>
+                                                    <attribute id="Parent" type="uint64" value="18428729675200069632"/>
+                                                    <attribute id="StatsID" type="FixedString" value="{{ item.StatsID }}"/>
+                                                    <attribute id="UUID" type="guid" value="{{ item.UUID }}"/>
+                                                    <attribute id="UnEquipLocked" type="bool" value="false"/>
+                                                    <attribute id="UseRemotely" type="bool" value="false"/>
+                                                </node>
+                                            </children>
+                                        </node>
+                                         {%- endfor %}
+                                    </children>
+                                </node>
+                                {%- else %}
                                 <node id="Items">
                                     <children>
                                         <node id="Item">
@@ -791,6 +833,7 @@
                                         </node>
                                     </children>
                                 </node>
+                                {%- endif %}
                                 {%- if character.PlayerPrepareSpell.Spells is defined and character.PlayerPrepareSpell.Spells|length > 0 %}
                                 <node id="PrepareSpells">
                                     <children>

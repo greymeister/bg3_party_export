@@ -9,15 +9,68 @@ It seems like a pretty neat thing to be able to dump your character state and th
 so this is my attempt at that.
 
 Credits to Norbyte for [BG3SE](https://github.com/Norbyte/bg3se/) and [lslib](https://github.com/Norbyte/lslib) which made this possible.
+Thanks to the folks in `#scripting-dev-chat` on Larian's discord for some example scripts and advice.
+And of course to Larian for making an amazing game.
 
 ## Usage
 
 First, this requires [BG3SE](https://github.com/Norbyte/bg3se/) to make use of.  Launch the game with the script console
-enabled as per the instructions of that project, and when you have the game loaded, run the following command in the console:
+enabled as per the instructions of that project, and when you have the game loaded, run the following in the console:
 
+```lua
+--[[
+function getItems()
+    local inventory = {}
+
+    for _,item in pairs(_C():GetAllComponents().InventoryOwner.Inventories[2].InventoryContainer.Items) do
+        local itemRoot  = item.Item.GameObjectVisual.RootTemplateId
+        local itemUuid = item.Item.Uuid.EntityUuid
+        local statsId = item.Item.Data.StatsId
+        local amount = Osi.GetStackAmount(itemUuid)
+        local slot = item.Item.InventoryMember.EquipmentSlot
+        local isKey = item.Item.ServerItem.Template.IsKey
+        local key = ""
+        if item.Item.Key ~= nil and item.Item.Key.Key ~= nil then key = item.Item.Key.Key end
+        local itemGroup = "Common"
+        if item.Item.Value.Unique then itemGroup = "Unique" end
+        local lockDc = item.Item.ServerItem.Template.LockDifficultyClassID
+        itemInfo = {
+            Amount=amount, ID=itemRoot, InventorySlot=slot, IsEquipped="true", IsKey=isKey,
+            ItemGroup=itemGroup, Key=key, LockDifficultyClassID=lockDc, StatsID=statsId, UUID=itemUuid
+        }
+        table.insert(inventory, itemInfo)
+    end
+
+    for _,item in pairs(_C():GetAllComponents().InventoryOwner.PrimaryInventory.InventoryContainer.Items) do
+        local itemRoot  = item.Item.GameObjectVisual.RootTemplateId
+        local itemUuid = item.Item.Uuid.EntityUuid
+        local statsId = item.Item.Data.StatsId
+        local amount = Osi.GetStackAmount(itemUuid)
+        local slot = item.Item.InventoryMember.EquipmentSlot + 18 -- Equipment overlap
+        local isKey = item.Item.ServerItem.Template.IsKey
+        local key = ""
+        if item.Item.Key ~= nil and item.Item.Key.Key ~= nil then key = item.Item.Key.Key end
+        local itemGroup = "Common"
+        if item.Item.Value.Unique then itemGroup = "Unique" end
+        local lockDc = item.Item.ServerItem.Template.LockDifficultyClassID
+        itemInfo = {
+            Amount=amount, ID=itemRoot, InventorySlot=slot, IsEquipped="false", IsKey=isKey,
+            ItemGroup=itemGroup, Key=key, LockDifficultyClassID=lockDc, StatsID=statsId, UUID=itemUuid
+        }
+        table.insert(inventory, itemInfo)
+    end
+
+    return inventory
+end
+
+character=_C():GetAllComponents()
+inventory=getItems()
+character.ImportedInventory=inventory
+]]--
 ```
-entity=Ext.Entity.Get(GetHostCharacter())
-Ext.IO.SaveFile("charname.json", Ext.DumpExport(entity:GetAllComponents()))
+Then finally run this command:
+```lua
+Ext.IO.SaveFile("charname.json", Ext.DumpExport(character))
 ```
 
 This will create a file `charname.json` in your `AppData/Local/Larian Studios/Baldur's Gate 3/Script Extender` directory.
@@ -31,58 +84,42 @@ Then using this project you can run using python 3.11+ with either of the follow
 
 1. With pipenv available:
 
-```
+```shell
 pipenv install
 pipenv shell
 ```
 
 2. Without pipenv:
 
-```
+```shell
 pip install -r requirements.txt
 ```
 
 After doing either 1) or 2), then run the following:
 
-```
+```shell
 python convert_party_editor.py charname.json > party.lsx
 ```
 
 If you'd like to have more than one character, simply export multiple character json files with SE and then run like this:
 
-```
+```shell
 python convert_party_editor.py file1.json file2.json file3.json file4.json > party.lsx
 ```
 
 Then create a directory in your BG3 Installation directory `Data/Mods/GustavDev/Story/PartyEditor` and place the lsx file
-created  from the previous command.  Now start a new with a non-origin character, when the BG3SE console is available run this command in it:
+created by the script.  Now start a new game with a **Custom** (Tav) character.  When the BG3SE console is available run this:
 
-```
+```lua
+_Purge=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
 LoadPartyPreset("party", GetHostCharacter())
 ```
 
-**Note** do not append `.lsx` extension here.
+**Note** `.lsx` extension is not used with the parameter
 
-After that, save and load (or go to main menu and load if Honour mode is on) as stats and spell slots are wonky.
+Then, after loading the party preset run the following:
 
-## Troubleshooting
-
-### Clean character from game
-
-*Note* This has worked for me but messing with the DB contents can cause bugs so unless you specifically need to do this **don't**.
-
-Run the following command from the script console before you load the party preset:
-
-**Note** previously I had `_Purge=GetHostCharacter()` but based on the values I'm seeing in the DB that's not what the
-game is using.
-
-```
-_Purge=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
-```
-
-Then, after loading the party preset and making sure things look right, run the following [source](https://old.reddit.com/r/BaldursGate3/comments/15qb8lu/guide_removing_custom_multiplayer_party_members/):
-
-```
+```lua
 --[[
 MakeNPC(_Purge)
 SetFaction(_Purge, "NPC_cfb709b3-220f-9682-bcfb-6f0d8837462e")
@@ -101,36 +138,46 @@ Osi.PROC_CheckPartyFull()
 ]]--
 ```
 
-This cleans references, but I'll need to do more testing to see if anything breaks downstream due to a script bug etc.
+This cleans references to your initial character. If it is found that anything breaks downstream due to a script bug I will amend the instructions.
 
-**Note** Do this *before* you save/load or else `_Purge` will be undefined.
+After that, save and load (or go to main menu and load if Honour mode is on) as stats and spell slots are wonky after import.
+
+## Troubleshooting
+
+### Inventory
+
+The script now tries to populate inventory, but will not handle nested containers.
+
+For example, if you have a camp supply sack with food items in it, the food items will not be
+transferred over.  The camp supply sack will be imported, just not their contents.
 
 ### Fixing character icon
 
-The character icon will default to an old picture of Karlach.  The data needed is a base64 encoded webp file.  Right now
-that data is not exposed by SE so until then it's just a placeholder.  To fix run the following:
+**Note** With a build of BG3SE that has the ScratchBuffer exposed for CustomIcon elements, this is no longer necessary.
 
-```
+If the CharacterIcon WEBP buffer is not available, it will default to a picture of Karlach.  To fix run the following:
+
+```lua
 Osi.StartChangeAppearance(GetHostCharacter())
 ```
 
 If your party preset is an origin character, you'll need to respec or level up to fix the icon:
 
-```
+```lua
 Osi.StartRespec(GetHostCharacter())
 ```
 
-If your preset is an Origin Oathbreaker I guess just wait until you level up 💩
+If your preset is an Origin Oathbreaker I guess just level up 💩
 
 ### Fixing Avatar Status
 
 If you import multiple Tavs only the last one in the resulting lsx file will be marked as an avatar.  It seems like the
 `LoadPartyPreset` function strips the avatar tag off of the other characters.  It also can cause issues where these
-characters aren't able to travel to camp.  If you don't find this desirable you can run the following  script:
+characters aren't able to travel to camp.  Fix by running the following  script with the character selected:
 
-```
-_UUID=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
+```lua
 --[[
+_UUID=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
 Osi.DB_Players(_UUID)
 Osi.DB_Avatars(_UUID)
 Osi.DB_PartOfTheTeam(_UUID)
@@ -141,18 +188,22 @@ Osi.PROC_CheckPartyFull()
 
 Then save and reload, your characters should be marked as avatars and be able to visit camp etc.
 
+### Wizard Spellbook Learned Spells
+
+I have not had a chance to use the new Larian Toolkit, and not sure if that will help but right now I have not been able to
+read a wizard's learned spells and populate the party preset and have it import properly.
+
+What I plan to do is generate the scrolls for a character's learned spells and add those to the inventory.
+
 ## Status *WIP*
 
 This is still very much a work in progress.  Still working on the following:
 
-* Wizard Learned Spells
-* Inventory
+* Wizard Learned Spells -> create scrolls to replace
 
-Would like to fix/implement the following:
+Would be nice to fix/implement the following:
 
 * Statuses
 * Tadpole Powers
-* Inventory
-* Custom/Modded Origins Working
 
-Unfortunately I can only go by existing examples as there is no real specification or guide to what they can contain.
+Unfortunately I can only go by existing examples as there is no specification or guide to party presets.
