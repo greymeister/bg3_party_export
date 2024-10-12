@@ -1,0 +1,6 @@
+# Make sure to sync dev packages for pipenv e.g.
+pipenv sync -d
+
+# Run pyinstaller
+pyinstaller convert_party_editor.py
+pyinstaller -F convert_party_editor.py
