@@ -5,7 +5,7 @@ function getItems()
         local itemRoot  = item.Item.GameObjectVisual.RootTemplateId
         local itemUuid = item.Item.Uuid.EntityUuid
         local statsId = item.Item.Data.StatsId
-        local amount = Osi.GetStackAmount(itemUuid)
+        local amount = select(2, Osi.GetStackAmount(itemUuid))
         local slot = item.Item.InventoryMember.EquipmentSlot
         local isKey = item.Item.ServerItem.Template.IsKey
         local key = ""
@@ -25,7 +25,7 @@ function getItems()
         local itemRoot  = item.Item.GameObjectVisual.RootTemplateId
         local itemUuid = item.Item.Uuid.EntityUuid
         local statsId = item.Item.Data.StatsId
-        local amount = Osi.GetStackAmount(itemUuid)
+        local amount = select(2, Osi.GetStackAmount(itemUuid))
         local slot = item.Item.InventoryMember.EquipmentSlot + 18 -- Equipment overlap
         local isKey = item.Item.ServerItem.Template.IsKey
         local key = ""

@@ -26,7 +26,7 @@ function getItems()
         local itemRoot  = item.Item.GameObjectVisual.RootTemplateId
         local itemUuid = item.Item.Uuid.EntityUuid
         local statsId = item.Item.Data.StatsId
-        local amount = Osi.GetStackAmount(itemUuid)
+        local amount = select(2, Osi.GetStackAmount(itemUuid))
         local slot = item.Item.InventoryMember.EquipmentSlot
         local isKey = item.Item.ServerItem.Template.IsKey
         local key = ""
@@ -45,7 +45,7 @@ function getItems()
         local itemRoot  = item.Item.GameObjectVisual.RootTemplateId
         local itemUuid = item.Item.Uuid.EntityUuid
         local statsId = item.Item.Data.StatsId
-        local amount = Osi.GetStackAmount(itemUuid)
+        local amount = select(2, Osi.GetStackAmount(itemUuid))
         local slot = item.Item.InventoryMember.EquipmentSlot + 18 -- Equipment overlap
         local isKey = item.Item.ServerItem.Template.IsKey
         local key = ""
@@ -199,6 +199,7 @@ What I plan to do is generate the scrolls for a character's learned spells and a
 
 This is still very much a work in progress.  Still working on the following:
 
+* Apply dyes used on items
 * Wizard Learned Spells -> create scrolls to replace
 
 Would be nice to fix/implement the following:
