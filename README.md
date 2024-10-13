@@ -84,8 +84,8 @@ only have one "avatar" character with this setup.
 
 ### Create Party Preset
 
-Unzip or extract the convert_party_editor.zip to a location on your computer.  Change to that directory and 
-run the following:
+Unzip or extract the convert_party_editor.zip to a location on your computer.  Change to that directory and
+copy your `charname.json` to it.  Then run the following:
 
 ```shell
 convert_party_editor.exe charname.json > party.lsx
@@ -98,7 +98,9 @@ convert_party_editor.exe file1.json file2.json file3.json file4.json > party.lsx
 ```
 
 Then create a directory in your BG3 Installation directory `Data/Mods/GustavDev/Story/PartyEditor` and place the lsx file
-created by the script.  Now start a new game with a **Custom** (Tav) character.  When the BG3SE console is available run this:
+created by the script.  Now start a new game with a **Custom** (Tav) character.  Allow the initial 
+["Escape the Nautiloid"](https://bg3.wiki/wiki/Escape_the_Nautiloid) 
+journal update to trigger meaning the game is ready.  Switch over to the BG3SE console and run these commands:
 
 ```lua
 _Purge=_C().ServerCharacter.Template.Name .. "_" .. GetHostCharacter()
